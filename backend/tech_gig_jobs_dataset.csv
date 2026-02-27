@@ -1,0 +1,106 @@
+job_id,job_title,job_type,required_skills,location,experience_level,pay_type,pay_amount,category,underserved_focus
+J100,Frontend Developer,Gig,HTML|CSS|JavaScript|React,Remote,Beginner,Per Hour,41500,Web Development,Yes
+J101,Backend Developer,Part-Time,Python|Django|APIs,Remote,Intermediate,Per Hour,58100,Web Development,No
+J102,Data Analyst Intern,Part-Time,Excel|SQL|Python,Bangalore,Beginner,Per Month,1245000,Data Analytics,Yes
+J103,Machine Learning Assistant,Gig,Python|ML|Pandas,Remote,Intermediate,Per Task,166000,AI/ML,Yes
+J104,UI/UX Designer,Freelance,Figma|Wireframing|UX,Remote,Beginner,Per Task,249000,Design,No
+J105,WordPress Developer,Gig,WordPress|PHP|CSS,Mumbai,Beginner,Per Hour,33200,Web Development,Yes
+J106,Cloud Support Associate,Part-Time,AWS|Linux|Networking,Hyderabad,Intermediate,Per Month,1660000,Cloud Computing,No
+J107,Cybersecurity Analyst,Gig,Networking|Security|Linux,Remote,Expert,Per Task,415000,Cybersecurity,Yes
+J108,Mobile App Developer,Freelance,Flutter|Firebase|Dart,Remote,Intermediate,Per Task,498000,App Development,No
+J109,Technical Content Writer,Part-Time,Writing|Tech|SEO,Remote,Beginner,Per Article,66400,Content,Yes
+J110,Frontend Developer,Gig,HTML|CSS|JavaScript|React,Remote,Beginner,Per Hour,41500,Web Development,Yes
+J111,Backend Developer,Part-Time,Python|Django|APIs,Remote,Intermediate,Per Hour,58100,Web Development,No
+J112,Data Analyst Intern,Part-Time,Excel|SQL|Python,Bangalore,Beginner,Per Month,1245000,Data Analytics,Yes
+J113,Machine Learning Assistant,Gig,Python|ML|Pandas,Remote,Intermediate,Per Task,166000,AI/ML,Yes
+J114,UI/UX Designer,Freelance,Figma|Wireframing|UX,Remote,Beginner,Per Task,249000,Design,No
+J115,WordPress Developer,Gig,WordPress|PHP|CSS,Mumbai,Beginner,Per Hour,33200,Web Development,Yes
+J116,Cloud Support Associate,Part-Time,AWS|Linux|Networking,Hyderabad,Intermediate,Per Month,1660000,Cloud Computing,No
+J117,Cybersecurity Analyst,Gig,Networking|Security|Linux,Remote,Expert,Per Task,415000,Cybersecurity,Yes
+J118,Mobile App Developer,Freelance,Flutter|Firebase|Dart,Remote,Intermediate,Per Task,498000,App Development,No
+J119,Technical Content Writer,Part-Time,Writing|Tech|SEO,Remote,Beginner,Per Article,66400,Content,Yes
+J120,Frontend Developer,Gig,HTML|CSS|JavaScript|React,Remote,Beginner,Per Hour,41500,Web Development,Yes
+J121,Backend Developer,Part-Time,Python|Django|APIs,Remote,Intermediate,Per Hour,58100,Web Development,No
+J122,Data Analyst Intern,Part-Time,Excel|SQL|Python,Bangalore,Beginner,Per Month,1245000,Data Analytics,Yes
+J123,Machine Learning Assistant,Gig,Python|ML|Pandas,Remote,Intermediate,Per Task,166000,AI/ML,Yes
+J124,UI/UX Designer,Freelance,Figma|Wireframing|UX,Remote,Beginner,Per Task,249000,Design,No
+J125,WordPress Developer,Gig,WordPress|PHP|CSS,Mumbai,Beginner,Per Hour,33200,Web Development,Yes
+J126,Cloud Support Associate,Part-Time,AWS|Linux|Networking,Hyderabad,Intermediate,Per Month,1660000,Cloud Computing,No
+J127,Cybersecurity Analyst,Gig,Networking|Security|Linux,Remote,Expert,Per Task,415000,Cybersecurity,Yes
+J128,Mobile App Developer,Freelance,Flutter|Firebase|Dart,Remote,Intermediate,Per Task,498000,App Development,No
+J129,Technical Content Writer,Part-Time,Writing|Tech|SEO,Remote,Beginner,Per Article,66400,Content,Yes
+J130,Frontend Developer,Gig,HTML|CSS|JavaScript|React,Remote,Beginner,Per Hour,41500,Web Development,Yes
+J131,Backend Developer,Part-Time,Python|Django|APIs,Remote,Intermediate,Per Hour,58100,Web Development,No
+J132,Data Analyst Intern,Part-Time,Excel|SQL|Python,Bangalore,Beginner,Per Month,1245000,Data Analytics,Yes
+J133,Machine Learning Assistant,Gig,Python|ML|Pandas,Remote,Intermediate,Per Task,166000,AI/ML,Yes
+J134,UI/UX Designer,Freelance,Figma|Wireframing|UX,Remote,Beginner,Per Task,249000,Design,No
+J135,WordPress Developer,Gig,WordPress|PHP|CSS,Mumbai,Beginner,Per Hour,33200,Web Development,Yes
+J136,Cloud Support Associate,Part-Time,AWS|Linux|Networking,Hyderabad,Intermediate,Per Month,1660000,Cloud Computing,No
+J137,Cybersecurity Analyst,Gig,Networking|Security|Linux,Remote,Expert,Per Task,415000,Cybersecurity,Yes
+J138,Mobile App Developer,Freelance,Flutter|Firebase|Dart,Remote,Intermediate,Per Task,498000,App Development,No
+J139,Technical Content Writer,Part-Time,Writing|Tech|SEO,Remote,Beginner,Per Article,66400,Content,Yes
+J140,Frontend Developer,Gig,HTML|CSS|JavaScript|React,Remote,Beginner,Per Hour,41500,Web Development,Yes
+J141,Backend Developer,Part-Time,Python|Django|APIs,Remote,Intermediate,Per Hour,58100,Web Development,No
+J142,Data Analyst Intern,Part-Time,Excel|SQL|Python,Bangalore,Beginner,Per Month,1245000,Data Analytics,Yes
+J143,Machine Learning Assistant,Gig,Python|ML|Pandas,Remote,Intermediate,Per Task,166000,AI/ML,Yes
+J144,UI/UX Designer,Freelance,Figma|Wireframing|UX,Remote,Beginner,Per Task,249000,Design,No
+J145,WordPress Developer,Gig,WordPress|PHP|CSS,Mumbai,Beginner,Per Hour,33200,Web Development,Yes
+J146,Cloud Support Associate,Part-Time,AWS|Linux|Networking,Hyderabad,Intermediate,Per Month,1660000,Cloud Computing,No
+J147,Cybersecurity Analyst,Gig,Networking|Security|Linux,Remote,Expert,Per Task,415000,Cybersecurity,Yes
+J148,Mobile App Developer,Freelance,Flutter|Firebase|Dart,Remote,Intermediate,Per Task,498000,App Development,No
+J149,Technical Content Writer,Part-Time,Writing|Tech|SEO,Remote,Beginner,Per Article,66400,Content,Yes
+J150,Frontend Developer,Gig,HTML|CSS|JavaScript|React,Remote,Beginner,Per Hour,41500,Web Development,Yes
+J151,Backend Developer,Part-Time,Python|Django|APIs,Remote,Intermediate,Per Hour,58100,Web Development,No
+J152,Data Analyst Intern,Part-Time,Excel|SQL|Python,Bangalore,Beginner,Per Month,1245000,Data Analytics,Yes
+J153,Machine Learning Assistant,Gig,Python|ML|Pandas,Remote,Intermediate,Per Task,166000,AI/ML,Yes
+J154,UI/UX Designer,Freelance,Figma|Wireframing|UX,Remote,Beginner,Per Task,249000,Design,No
+J155,WordPress Developer,Gig,WordPress|PHP|CSS,Mumbai,Beginner,Per Hour,33200,Web Development,Yes
+J156,Cloud Support Associate,Part-Time,AWS|Linux|Networking,Hyderabad,Intermediate,Per Month,1660000,Cloud Computing,No
+J157,Cybersecurity Analyst,Gig,Networking|Security|Linux,Remote,Expert,Per Task,415000,Cybersecurity,Yes
+J158,Mobile App Developer,Freelance,Flutter|Firebase|Dart,Remote,Intermediate,Per Task,498000,App Development,No
+J159,Technical Content Writer,Part-Time,Writing|Tech|SEO,Remote,Beginner,Per Article,66400,Content,Yes
+J160,Data Engineer,Part-Time,Python|React|SQL,Delhi,Intermediate,Per Hour,123670,Data Analytics,Yes
+J161,Data Engineer,Gig,APIs|Linux|JavaScript,Delhi,Intermediate,Per Hour,302203,Web Development,Yes
+J162,Cloud Engineer,Part-Time,Django|Linux|TensorFlow,Delhi,Beginner,Per Project,166415,Data Analytics,No
+J163,Automation Tester,Gig,Python|Docker|React,Remote,Beginner,Per Hour,171312,Cloud Computing,Yes
+J164,Data Engineer,Freelance,Docker|React|NodeJS,Remote,Expert,Per Project,65321,Web Development,No
+J165,App Developer,Part-Time,AWS|NodeJS|TensorFlow,Bangalore,Expert,Per Hour,83083,Content,No
+J166,Data Engineer,Freelance,Python|SQL|Docker,Bangalore,Expert,Per Project,118939,Web Development,No
+J167,SEO Specialist,Freelance,React|JavaScript|SQL,Bangalore,Expert,Per Project,169652,Content,Yes
+J168,DevOps Engineer,Freelance,SQL|Linux|Python,Mumbai,Intermediate,Per Project,257466,Content,No
+J169,SEO Specialist,Gig,SQL|AWS|Flutter,Delhi,Intermediate,Per Task,365781,App Development,Yes
+J170,Backend Developer,Part-Time,Linux|React|Python,Mumbai,Intermediate,Per Project,201109,AI/ML,No
+J171,Frontend Developer,Freelance,AWS|SEO|Django,Delhi,Intermediate,Per Project,106738,App Development,Yes
+J172,App Developer,Part-Time,SQL|Flutter|Python,Hyderabad,Intermediate,Per Month,64325,Content,Yes
+J173,ML Engineer,Part-Time,React|SQL|JavaScript,Hyderabad,Beginner,Per Task,158945,App Development,No
+J174,Data Engineer,Freelance,JavaScript|Flutter|Docker,Delhi,Expert,Per Hour,302120,App Development,No
+J175,Automation Tester,Part-Time,React|SQL|Docker,Bangalore,Intermediate,Per Task,84909,Design,Yes
+J176,App Developer,Freelance,APIs|NodeJS|AWS,Bangalore,Expert,Per Task,204014,Content,No
+J177,App Developer,Gig,Django|Python|React,Bangalore,Intermediate,Per Task,354327,Cybersecurity,Yes
+J178,Automation Tester,Freelance,AWS|Docker|Flutter,Delhi,Expert,Per Month,158032,Data Analytics,No
+J179,Backend Developer,Gig,Figma|React|NodeJS,Mumbai,Expert,Per Hour,118192,Content,No
+J180,Technical Analyst,Gig,AWS|Flutter|Python,Hyderabad,Intermediate,Per Hour,349513,Design,No
+J181,SEO Specialist,Freelance,Excel|React|Linux,Remote,Beginner,Per Hour,77771,Web Development,Yes
+J182,Backend Developer,Freelance,Flutter|Figma|Docker,Mumbai,Intermediate,Per Month,400724,Web Development,No
+J183,AI Developer,Part-Time,React|Django|NodeJS,Remote,Expert,Per Project,254727,App Development,No
+J184,Frontend Developer,Part-Time,JavaScript|APIs|Python,Hyderabad,Intermediate,Per Project,89474,App Development,Yes
+J185,Data Engineer,Gig,Excel|Docker|TensorFlow,Hyderabad,Intermediate,Per Project,334324,AI/ML,Yes
+J186,Cloud Engineer,Part-Time,Python|Linux|SQL,Remote,Intermediate,Per Task,269169,App Development,Yes
+J187,Backend Developer,Freelance,Flutter|Figma|TensorFlow,Remote,Intermediate,Per Hour,291164,Design,No
+J188,Frontend Developer,Gig,Docker|AWS|Excel,Mumbai,Intermediate,Per Task,141598,App Development,No
+J189,DevOps Engineer,Part-Time,Figma|Docker|APIs,Remote,Expert,Per Hour,147740,Web Development,No
+J190,Cloud Engineer,Gig,Docker|NodeJS|SQL,Hyderabad,Beginner,Per Project,54614,Content,Yes
+J191,DevOps Engineer,Gig,Python|Flutter|SQL,Hyderabad,Expert,Per Hour,381966,Data Analytics,No
+J192,Technical Analyst,Freelance,Excel|SEO|Python,Mumbai,Expert,Per Hour,188659,App Development,No
+J193,Backend Developer,Freelance,JavaScript|Django|Python,Bangalore,Expert,Per Project,71214,Data Analytics,No
+J194,SEO Specialist,Gig,Python|JavaScript|AWS,Remote,Expert,Per Project,379808,Cloud Computing,No
+J195,Cloud Engineer,Part-Time,Linux|React|JavaScript,Hyderabad,Intermediate,Per Task,251573,AI/ML,Yes
+J196,DevOps Engineer,Part-Time,Excel|Figma|APIs,Mumbai,Intermediate,Per Task,182849,AI/ML,Yes
+J197,Cloud Engineer,Freelance,React|Django|APIs,Delhi,Beginner,Per Month,331336,Data Analytics,Yes
+J198,Technical Analyst,Freelance,TensorFlow|APIs|Flutter,Delhi,Expert,Per Project,296642,Content,Yes
+J199,ML Engineer,Freelance,Linux|React|TensorFlow,Bangalore,Intermediate,Per Task,193307,Web Development,No
+J200,UI Designer,Part-Time,Docker|Python|TensorFlow,Mumbai,Beginner,Per Hour,52373,AI/ML,Yes
+J201,Frontend Developer,Part-Time,TensorFlow|JavaScript|Django,Delhi,Intermediate,Per Task,304361,App Development,No
+J202,AI Developer,Gig,Excel|Python|Figma,Remote,Beginner,Per Task,391926,Data Analytics,Yes
+J203,App Developer,Gig,Python|NodeJS|APIs,Hyderabad,Intermediate,Per Task,105825,Cybersecurity,Yes
+J204,DevOps Engineer,Gig,Docker|Python|Linux,Bangalore,Beginner,Per Task,286433,App Development,Yes

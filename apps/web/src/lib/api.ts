@@ -89,6 +89,28 @@ export async function fetchMyApplications() {
   return handleResponse(res);
 }
 
+export async function fetchApplicationsForGig(gigId: string) {
+  const headers = await getAuthHeaders();
+  const res = await fetch(`${API_URL}/api/applications/gig/${gigId}`, { headers });
+  return handleResponse(res);
+}
+
+export async function updateApplicationStatus(applicationId: string, status: string) {
+  const headers = await getAuthHeaders();
+  const res = await fetch(`${API_URL}/api/applications/${applicationId}/status`, {
+    method: 'PATCH',
+    headers,
+    body: JSON.stringify({ status }),
+  });
+  return handleResponse(res);
+}
+
+export async function fetchClientApplications() {
+  const headers = await getAuthHeaders();
+  const res = await fetch(`${API_URL}/api/applications/client`, { headers });
+  return handleResponse(res);
+}
+
 // ── Dashboard ─────────────────────────────────────────────
 
 export async function fetchFreelancerDashboard() {

@@ -1,12 +1,13 @@
 import { z } from 'zod';
 import dotenv from 'dotenv';
+import path from 'path';
 
-dotenv.config({ path: '../../.env' });
+dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
 
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   PORT: z.string().default('4000'),
-  DATABASE_URL: z.string().default('file:../../prisma/dev.db'),
+  DATABASE_URL: z.string().default('file:./dev.db'),
   JWT_ACCESS_SECRET: z.string().min(1).default('dev_access_secret_change_me'),
   JWT_REFRESH_SECRET: z.string().min(1).default('dev_refresh_secret_change_me'),
   JWT_ACCESS_EXPIRY: z.string().default('15m'),

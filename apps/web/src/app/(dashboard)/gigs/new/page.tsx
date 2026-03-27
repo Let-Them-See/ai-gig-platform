@@ -2,122 +2,302 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Plus, X } from 'lucide-react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { createGig } from '@/lib/api';
+import { ArrowLeft, Plus, X, Loader2 } from 'lucide-react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
-const categoryOptions = [
-  'NLP / Text AI', 'Computer Vision', 'ML Engineering', 'Data Science',
-  'AI Integration', 'LLM Fine-tuning', 'Chatbot Dev', 'Automation / Agents',
+const CATEGORIES = [
+  'Web Development', 'AI/ML', 'Data Analytics', 'App Development',
+  'Cloud Computing', 'Cybersecurity', 'NLP / Text AI', 'Computer Vision',
+  'ML Engineering', 'Data Science', 'AI Integration', 'LLM Fine-tuning',
+  'Chatbot Dev', 'Automation / Agents', 'DevOps', 'Design',
 ];
+
+const EXPERIENCE_LEVELS = ['Beginner', 'Intermediate', 'Expert'];
+const JOB_TYPES = ['Full-time', 'Part-time', 'Contract', 'Freelance'];
+const PAY_TYPES = ['Fixed Price', 'Hourly', 'Monthly'];
 
 export default function NewGigPage() {
   const router = useRouter();
+  const queryClient = useQueryClient();
+
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState(CATEGORIES[0]);
+  const [experienceLevel, setExperienceLevel] = useState(EXPERIENCE_LEVELS[0]);
+  const [jobType, setJobType] = useState(JOB_TYPES[0]);
+  const [payType, setPayType] = useState(PAY_TYPES[0]);
+  const [budgetMin, setBudgetMin] = useState('');
+  const [budgetMax, setBudgetMax] = useState('');
+  const [location, setLocation] = useState('');
+  const [isRemote, setIsRemote] = useState(true);
   const [skills, setSkills] = useState<string[]>([]);
   const [skillInput, setSkillInput] = useState('');
+  const [error, setError] = useState('');
 
   const addSkill = () => {
-    if (skillInput.trim() && !skills.includes(skillInput.trim())) {
-      setSkills([...skills, skillInput.trim()]);
+    const trimmed = skillInput.trim();
+    if (trimmed && !skills.includes(trimmed)) {
+      setSkills([...skills, trimmed]);
       setSkillInput('');
     }
   };
 
+  const mutation = useMutation({
+    mutationFn: (data: Record<string, unknown>) => createGig(data),
+    onSuccess: () => {
+      // Invalidate gigs cache so the new job shows up immediately everywhere
+      queryClient.invalidateQueries({ queryKey: ['gigs'] });
+      queryClient.invalidateQueries({ queryKey: ['client-dashboard'] });
+      router.push('/gigs');
+    },
+    onError: (err: Error) => {
+      setError(err.message || 'Failed to create gig. Please try again.');
+    },
+  });
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In production: call POST /api/gigs
-    router.push('/dashboard/gigs');
+    setError('');
+
+    if (title.length < 5) {
+      setError('Title must be at least 5 characters.');
+      return;
+    }
+    if (description.length < 20) {
+      setError('Description must be at least 20 characters.');
+      return;
+    }
+
+    mutation.mutate({
+      title,
+      description,
+      skills,
+      category,
+      experienceLevel,
+      jobType,
+      payType,
+      location: location || undefined,
+      isRemote,
+      budgetMin: budgetMin ? parseFloat(budgetMin) : undefined,
+      budgetMax: budgetMax ? parseFloat(budgetMax) : undefined,
+    });
   };
 
   return (
-    <div className="max-w-3xl space-y-6">
-      <Link href="/dashboard/gigs" className="inline-flex items-center gap-2 text-sm text-surface-800/60 hover:text-brand-600">
+    <div className="max-w-3xl mx-auto space-y-6">
+      <Link href="/gigs" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
         <ArrowLeft className="w-4 h-4" /> Back to Gigs
       </Link>
 
-      <h1 className="text-2xl font-bold text-surface-900">Post a New Gig</h1>
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+        <h1 className="text-2xl font-bold mb-1">Post a New Job</h1>
+        <p className="text-muted-foreground text-sm">Fill in the details below. Your job will be visible to freelancers immediately.</p>
+      </motion.div>
 
-      <form onSubmit={handleSubmit} className="card-elevated p-6 space-y-6">
+      {error && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm"
+        >
+          {error}
+        </motion.div>
+      )}
+
+      <motion.form
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        onSubmit={handleSubmit}
+        className="bg-card border border-[rgb(var(--border))] rounded-2xl p-6 space-y-6"
+      >
+        {/* Title */}
         <div>
-          <label className="block text-sm font-medium text-surface-900 mb-1.5">Title</label>
-          <input type="text" required placeholder="e.g. Build NLP pipeline for customer feedback analysis"
-            className="w-full px-4 py-3 rounded-xl border border-surface-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none" />
+          <label className="block text-sm font-medium mb-1.5">Job Title *</label>
+          <input
+            type="text"
+            required
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="e.g. Build NLP pipeline for customer feedback analysis"
+            className="w-full px-4 py-3 rounded-xl bg-muted border border-[rgb(var(--border))] focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors"
+          />
         </div>
 
+        {/* Description */}
         <div>
-          <label className="block text-sm font-medium text-surface-900 mb-1.5">Description</label>
-          <textarea rows={6} required placeholder="Describe your project in detail..."
-            className="w-full px-4 py-3 rounded-xl border border-surface-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none resize-none" />
+          <label className="block text-sm font-medium mb-1.5">Description *</label>
+          <textarea
+            rows={5}
+            required
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Describe your project in detail — what you need, deliverables, and timeline..."
+            className="w-full px-4 py-3 rounded-xl bg-muted border border-[rgb(var(--border))] focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none resize-none transition-colors"
+          />
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-surface-900 mb-1.5">Requirements</label>
-          <textarea rows={4} placeholder="List specific skills and experience needed..."
-            className="w-full px-4 py-3 rounded-xl border border-surface-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none resize-none" />
-        </div>
-
+        {/* Category + Experience */}
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-surface-900 mb-1.5">Category</label>
-            <select className="w-full px-4 py-3 rounded-xl border border-surface-200 focus:border-brand-500 outline-none bg-white">
-              {categoryOptions.map(c => <option key={c}>{c}</option>)}
+            <label className="block text-sm font-medium mb-1.5">Category</label>
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="w-full px-4 py-3 rounded-xl bg-muted border border-[rgb(var(--border))] focus:border-primary outline-none transition-colors"
+            >
+              {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-surface-900 mb-1.5">Experience Level</label>
-            <select className="w-full px-4 py-3 rounded-xl border border-surface-200 focus:border-brand-500 outline-none bg-white">
-              <option>Beginner</option>
-              <option>Intermediate</option>
-              <option>Expert</option>
+            <label className="block text-sm font-medium mb-1.5">Experience Level</label>
+            <select
+              value={experienceLevel}
+              onChange={(e) => setExperienceLevel(e.target.value)}
+              className="w-full px-4 py-3 rounded-xl bg-muted border border-[rgb(var(--border))] focus:border-primary outline-none transition-colors"
+            >
+              {EXPERIENCE_LEVELS.map(e => <option key={e} value={e}>{e}</option>)}
             </select>
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-4">
+        {/* Job Type + Pay Type */}
+        <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-surface-900 mb-1.5">Budget ($)</label>
-            <input type="number" required placeholder="4500" min={1}
-              className="w-full px-4 py-3 rounded-xl border border-surface-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-surface-900 mb-1.5">Budget Type</label>
-            <select className="w-full px-4 py-3 rounded-xl border border-surface-200 focus:border-brand-500 outline-none bg-white">
-              <option value="FIXED">Fixed Price</option>
-              <option value="HOURLY">Hourly</option>
+            <label className="block text-sm font-medium mb-1.5">Job Type</label>
+            <select
+              value={jobType}
+              onChange={(e) => setJobType(e.target.value)}
+              className="w-full px-4 py-3 rounded-xl bg-muted border border-[rgb(var(--border))] focus:border-primary outline-none transition-colors"
+            >
+              {JOB_TYPES.map(j => <option key={j} value={j}>{j}</option>)}
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-surface-900 mb-1.5">Deadline</label>
-            <input type="date"
-              className="w-full px-4 py-3 rounded-xl border border-surface-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none" />
+            <label className="block text-sm font-medium mb-1.5">Pay Type</label>
+            <select
+              value={payType}
+              onChange={(e) => setPayType(e.target.value)}
+              className="w-full px-4 py-3 rounded-xl bg-muted border border-[rgb(var(--border))] focus:border-primary outline-none transition-colors"
+            >
+              {PAY_TYPES.map(p => <option key={p} value={p}>{p}</option>)}
+            </select>
           </div>
         </div>
 
+        {/* Budget Min / Max */}
+        <div className="grid md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-1.5">Budget Min (₹)</label>
+            <input
+              type="number"
+              min={0}
+              value={budgetMin}
+              onChange={(e) => setBudgetMin(e.target.value)}
+              placeholder="e.g. 25000"
+              className="w-full px-4 py-3 rounded-xl bg-muted border border-[rgb(var(--border))] focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1.5">Budget Max (₹)</label>
+            <input
+              type="number"
+              min={0}
+              value={budgetMax}
+              onChange={(e) => setBudgetMax(e.target.value)}
+              placeholder="e.g. 75000"
+              className="w-full px-4 py-3 rounded-xl bg-muted border border-[rgb(var(--border))] focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors"
+            />
+          </div>
+        </div>
+
+        {/* Location + Remote */}
+        <div className="grid md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-1.5">Location</label>
+            <input
+              type="text"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              placeholder="e.g. Mumbai, Bangalore"
+              className="w-full px-4 py-3 rounded-xl bg-muted border border-[rgb(var(--border))] focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors"
+            />
+          </div>
+          <div className="flex items-end pb-1">
+            <label className="flex items-center gap-3 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={isRemote}
+                onChange={(e) => setIsRemote(e.target.checked)}
+                className="w-5 h-5 rounded accent-primary"
+              />
+              <span className="text-sm font-medium">Remote friendly</span>
+            </label>
+          </div>
+        </div>
+
+        {/* Skills */}
         <div>
-          <label className="block text-sm font-medium text-surface-900 mb-1.5">Skills</label>
+          <label className="block text-sm font-medium mb-1.5">Required Skills</label>
           <div className="flex gap-2">
-            <input type="text" placeholder="Add a skill..." value={skillInput}
+            <input
+              type="text"
+              placeholder="Add a skill (e.g. Python, React)..."
+              value={skillInput}
               onChange={(e) => setSkillInput(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addSkill())}
-              className="flex-1 px-4 py-3 rounded-xl border border-surface-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none" />
-            <button type="button" onClick={addSkill} className="btn-secondary px-4"><Plus className="w-5 h-5" /></button>
+              onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addSkill(); } }}
+              className="flex-1 px-4 py-3 rounded-xl bg-muted border border-[rgb(var(--border))] focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors"
+            />
+            <button
+              type="button"
+              onClick={addSkill}
+              className="px-4 py-3 rounded-xl bg-muted border border-[rgb(var(--border))] hover:bg-primary/10 hover:border-primary/30 transition-colors"
+            >
+              <Plus className="w-5 h-5" />
+            </button>
           </div>
           {skills.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-3">
               {skills.map(s => (
-                <span key={s} className="inline-flex items-center gap-1 px-3 py-1.5 bg-brand-50 text-brand-600 rounded-lg text-sm font-medium">
+                <span key={s} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary/10 text-primary rounded-lg text-sm font-medium border border-primary/20">
                   {s}
-                  <button type="button" onClick={() => setSkills(skills.filter(sk => sk !== s))}><X className="w-3 h-3" /></button>
+                  <button type="button" onClick={() => setSkills(skills.filter(sk => sk !== s))} className="hover:text-red-400 transition-colors">
+                    <X className="w-3.5 h-3.5" />
+                  </button>
                 </span>
               ))}
             </div>
           )}
         </div>
 
-        <div className="flex gap-3 pt-4 border-t border-surface-200">
-          <button type="button" onClick={() => router.back()} className="btn-secondary flex-1">Cancel</button>
-          <button type="submit" className="btn-primary flex-1">Publish Gig</button>
+        {/* Actions */}
+        <div className="flex gap-3 pt-4 border-t border-[rgb(var(--border))]">
+          <button
+            type="button"
+            onClick={() => router.back()}
+            className="flex-1 px-6 py-3 rounded-xl bg-muted border border-[rgb(var(--border))] text-sm font-medium hover:bg-muted/80 transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            disabled={mutation.isPending}
+            className="flex-1 px-6 py-3 rounded-xl gradient-primary text-white text-sm font-semibold hover:opacity-90 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+          >
+            {mutation.isPending ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                Publishing...
+              </>
+            ) : (
+              'Publish Job'
+            )}
+          </button>
         </div>
-      </form>
+      </motion.form>
     </div>
   );
 }

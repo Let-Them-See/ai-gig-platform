@@ -91,7 +91,7 @@ cp .env.example .env
 The `.env` file has sensible defaults for local development:
 
 ```env
-DATABASE_URL="file:../../packages/db/prisma/dev.db"
+DATABASE_URL="file:./dev.db"
 JWT_ACCESS_SECRET="your-access-secret"
 JWT_REFRESH_SECRET="your-refresh-secret"
 PORT=4000

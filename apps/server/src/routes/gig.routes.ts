@@ -15,6 +15,10 @@ const createGigSchema = z.object({
     isRemote: z.boolean().optional(),
     budgetMin: z.number().positive().optional(),
     budgetMax: z.number().positive().optional(),
+    category: z.string().optional(),
+    experienceLevel: z.string().optional(),
+    jobType: z.string().optional(),
+    payType: z.string().optional(),
   }),
 });
 

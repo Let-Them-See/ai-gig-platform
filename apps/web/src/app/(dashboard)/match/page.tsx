@@ -1,20 +1,28 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { fetchMatches } from '@/lib/api';
+import { fetchMatches, fetchProfile } from '@/lib/api';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import {
   Sparkles, CheckCircle2, XCircle, ChevronDown, ChevronUp,
-  MapPin
+  MapPin, Upload
 } from 'lucide-react';
 import { cn, getMatchScoreColor, getMatchScoreBg, formatCurrency } from '@/lib/utils';
 import { useState } from 'react';
 
 export default function MatchPage() {
+  const { data: profile, isLoading: profileLoading } = useQuery({
+    queryKey: ['profile'],
+    queryFn: fetchProfile,
+  });
+
+  const hasResume = !!(profile as any)?.freelancerProfile?.resumeUrl || !!(profile as any)?.freelancerProfile?.resumeText;
+
   const { data, isLoading } = useQuery({
     queryKey: ['matches'],
     queryFn: () => fetchMatches(20),
+    enabled: hasResume,
   });
 
   const matches = (data as any[]) ?? [];
@@ -32,11 +40,22 @@ export default function MatchPage() {
         </p>
       </div>
 
-      {isLoading ? (
+      {profileLoading || isLoading ? (
         <div className="space-y-4">
           {[1, 2, 3, 4, 5].map((i) => (
             <div key={i} className="h-24 bg-card border border-[rgb(var(--border))] rounded-2xl animate-pulse" />
           ))}
+        </div>
+      ) : !hasResume ? (
+        <div className="text-center py-20 bg-card border border-[rgb(var(--border))] rounded-2xl">
+          <Upload className="w-12 h-12 text-primary mx-auto mb-4 opacity-60" />
+          <p className="text-lg font-semibold mb-2">Upload Your Resume for AI Matches</p>
+          <p className="text-muted-foreground text-sm mt-1 max-w-md mx-auto">
+            For the AI Match feature, upload your resume. We'll analyze your skills and experience to match you with the best gigs automatically.
+          </p>
+          <Link href="/resume" className="inline-flex items-center gap-2 px-6 py-3 gradient-primary text-white rounded-xl font-semibold hover:opacity-90 transition-all mt-6">
+            <Upload className="w-4 h-4" /> Upload Your Resume
+          </Link>
         </div>
       ) : matches.length === 0 ? (
         <div className="text-center py-20 bg-card border border-[rgb(var(--border))] rounded-2xl">

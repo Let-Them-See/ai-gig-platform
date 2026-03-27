@@ -4,9 +4,10 @@ import { useAuth } from '@/components/providers/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
 import { fetchFreelancerDashboard, fetchClientDashboard } from '@/lib/api';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import {
   ClipboardList, TrendingUp, FileText, Sparkles,
-  Briefcase, Users, BarChart3, Trophy
+  Briefcase, Users, BarChart3, Trophy, PlusCircle
 } from 'lucide-react';
 import { cn, getMatchScoreColor } from '@/lib/utils';
 import {
@@ -137,9 +138,18 @@ function ClientDashboard() {
 
   return (
     <div className="space-y-8">
-      <div>
-        <h1 className="text-2xl font-bold">Client Dashboard 📊</h1>
-        <p className="text-muted-foreground mt-1">Manage your gigs and candidates</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold">Client Dashboard 📊</h1>
+          <p className="text-muted-foreground mt-1">Manage your gigs and candidates</p>
+        </div>
+        <Link
+          href="/gigs/new"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl gradient-primary text-white font-semibold hover:opacity-90 transition-all shadow-lg hover:shadow-xl"
+        >
+          <PlusCircle className="w-5 h-5" />
+          Post a New Job
+        </Link>
       </div>
 
       {/* Stats Grid */}

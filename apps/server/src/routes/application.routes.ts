@@ -23,5 +23,6 @@ router.post('/apply', requireAuth, requireRole('FREELANCER'), validate(applySche
 router.get('/my', requireAuth, requireRole('FREELANCER'), appController.getMyApplications);
 router.get('/gig/:gigId', requireAuth, requireRole('CLIENT'), appController.getApplicationsForGig);
 router.patch('/:id/status', requireAuth, requireRole('CLIENT'), validate(updateStatusSchema), appController.updateApplicationStatus);
+router.get('/client', requireAuth, requireRole('CLIENT'), appController.getClientApplications);
 
 export default router;

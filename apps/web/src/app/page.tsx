@@ -7,7 +7,7 @@ import {
   Sparkles, Zap, Shield, BarChart3, ArrowRight, Brain,
   Code2, Cpu, ChevronRight, Moon, Sun, Menu, X
 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -50,6 +50,11 @@ const features = [
 export default function LandingPage() {
   const { theme, setTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <main className="min-h-screen overflow-hidden">
@@ -67,12 +72,18 @@ export default function LandingPage() {
             <div className="hidden md:flex items-center gap-6">
               <Link href="/gigs" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Browse Gigs</Link>
               <Link href="#features" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Features</Link>
-              <button
+                <button
                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
                 className="p-2 rounded-lg hover:bg-muted transition-colors"
                 aria-label="Toggle theme"
               >
-                {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                {!mounted ? (
+                  <div className="w-4 h-4" />
+                ) : theme === 'dark' ? (
+                  <Sun className="w-4 h-4" />
+                ) : (
+                  <Moon className="w-4 h-4" />
+                )}
               </button>
               <Link href="/login" className="btn-secondary text-sm py-2 px-4">Log In</Link>
               <Link href="/register" className="btn-primary text-sm py-2 px-4">Get Started</Link>

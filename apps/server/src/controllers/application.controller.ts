@@ -165,7 +165,7 @@ export async function getApplicationsForGig(req: AuthenticatedRequest, res: Resp
       where: { gigId: req.params.gigId },
       include: {
         freelancer: {
-          include: { user: { select: { name: true, avatarUrl: true } } },
+          include: { user: { select: { name: true, avatarUrl: true, email: true } } },
         },
       },
       orderBy: { matchScore: 'desc' },
@@ -228,5 +228,41 @@ export async function updateApplicationStatus(req: AuthenticatedRequest, res: Re
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Failed to update application';
     sendError(res, message, 'UPDATE_APP_FAILED', 500);
+  }
+}
+
+export async function getClientApplications(req: AuthenticatedRequest, res: Response): Promise<void> {
+  try {
+    if (!req.userId) {
+      sendError(res, 'Not authenticated', 'UNAUTHORIZED', 401);
+      return;
+    }
+
+    const clientProfile = await prisma.clientProfile.findUnique({
+      where: { userId: req.userId },
+    });
+
+    if (!clientProfile) {
+      sendError(res, 'Client profile not found', 'NOT_CLIENT', 403);
+      return;
+    }
+
+    const applications = await prisma.application.findMany({
+      where: {
+        gig: { clientId: clientProfile.id },
+      },
+      include: {
+        gig: true,
+        freelancer: {
+          include: { user: { select: { name: true, avatarUrl: true, email: true } } },
+        },
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+
+    sendSuccess(res, applications);
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Failed to get client applications';
+    sendError(res, message, 'GET_CLIENT_APPS_FAILED', 500);
   }
 }

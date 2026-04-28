@@ -113,13 +113,13 @@ export async function fetchClientApplications() {
 
 // ── Dashboard ─────────────────────────────────────────────
 
-export async function fetchFreelancerDashboard() {
+export async function fetchFreelancerDashboard(): Promise<any> {
   const headers = await getAuthHeaders();
   const res = await fetch(`${API_URL}/api/dashboard/freelancer`, { headers });
   return handleResponse(res);
 }
 
-export async function fetchClientDashboard() {
+export async function fetchClientDashboard(): Promise<any> {
   const headers = await getAuthHeaders();
   const res = await fetch(`${API_URL}/api/dashboard/client`, { headers });
   return handleResponse(res);

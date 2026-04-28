@@ -3,11 +3,11 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { Menu, X, Sparkles, LogOut } from 'lucide-react';
-import { useSimpleAuth } from '@/components/providers/AuthProvider';
+import { useAuth } from '@/components/providers/AuthProvider';
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { isAuthenticated, signOut } = useSimpleAuth();
+  const { isAuthenticated, logout } = useAuth();
 
   return (
     <nav className="sticky top-0 z-50 glass border-b border-surface-200/50">
@@ -45,7 +45,7 @@ export default function Navbar() {
                 </Link>
                 <button
                   type="button"
-                  onClick={signOut}
+                  onClick={logout}
                   className="inline-flex items-center gap-2 text-sm font-medium text-surface-800/70 hover:text-brand-600 transition-colors"
                 >
                   <LogOut className="w-4 h-4" />
@@ -100,7 +100,7 @@ export default function Navbar() {
               {isAuthenticated && (
                 <button
                   type="button"
-                  onClick={signOut}
+                  onClick={logout}
                   className="px-4 py-2 text-sm font-medium text-surface-800/70 hover:bg-surface-50 rounded-lg text-left"
                 >
                   Log Out

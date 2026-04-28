@@ -13,7 +13,7 @@ import {
   Users,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useSimpleAuth } from '@/components/providers/AuthProvider';
+import { useAuth } from '@/components/providers/AuthProvider';
 
 const clientLinks = [
   { href: '/dashboard', label: 'Overview', icon: LayoutDashboard },
@@ -35,7 +35,7 @@ const freelancerLinks = [
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const { user } = useSimpleAuth();
+  const { user } = useAuth();
 
   const links = user?.role === 'CLIENT' ? clientLinks : freelancerLinks;
 

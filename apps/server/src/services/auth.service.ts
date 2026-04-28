@@ -2,6 +2,7 @@ import { prisma } from '@gigforge/db';
 import bcrypt from 'bcryptjs';
 import { signAccessToken, signRefreshToken, verifyRefreshToken } from '../utils/jwt';
 import type { AuthTokens, AuthUser } from '@gigforge/types';
+import { parseSkills } from '../utils/skills';
 
 const SALT_ROUNDS = 12;
 
@@ -84,6 +85,10 @@ export async function refreshTokens(refreshToken: string): Promise<AuthTokens> {
 export async function getUserById(userId: string): Promise<AuthUser | null> {
   const user = await prisma.user.findUnique({
     where: { id: userId },
+    include: {
+      freelancerProfile: true,
+      clientProfile: true,
+    },
   });
   if (!user) return null;
 
@@ -93,6 +98,31 @@ export async function getUserById(userId: string): Promise<AuthUser | null> {
     name: user.name,
     role: user.role as 'FREELANCER' | 'CLIENT',
     avatarUrl: user.avatarUrl,
+    freelancerProfile: user.freelancerProfile
+      ? {
+          id: user.freelancerProfile.id,
+          userId: user.freelancerProfile.userId,
+          bio: user.freelancerProfile.bio,
+          skills: parseSkills(user.freelancerProfile.skills),
+          location: user.freelancerProfile.location,
+          hourlyRate: user.freelancerProfile.hourlyRate,
+          resumeUrl: user.freelancerProfile.resumeUrl,
+          resumeText: user.freelancerProfile.resumeText,
+          experience: user.freelancerProfile.experience,
+          githubUrl: user.freelancerProfile.githubUrl,
+          portfolioUrl: user.freelancerProfile.portfolioUrl,
+        }
+      : null,
+    clientProfile: user.clientProfile
+      ? {
+          id: user.clientProfile.id,
+          userId: user.clientProfile.userId,
+          companyName: user.clientProfile.companyName,
+          website: user.clientProfile.website,
+          location: user.clientProfile.location,
+          bio: user.clientProfile.bio,
+        }
+      : null,
   };
 }
 

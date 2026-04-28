@@ -1,4 +1,4 @@
 'use client';
 
-export { default } from '../../../../gigs/new/page';
+export { default } from '../../../gigs/new/page';
 

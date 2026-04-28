@@ -46,6 +46,8 @@ export interface AuthUser {
   name: string;
   role: Role;
   avatarUrl: string | null;
+  freelancerProfile?: FreelancerProfileData | null;
+  clientProfile?: ClientProfileData | null;
 }
 
 // ── Freelancer Profile ────────────────────────────────────

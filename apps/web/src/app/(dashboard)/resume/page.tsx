@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 import { uploadResume } from '@/lib/api';
 import { formatCurrency, getMatchScoreColor } from '@/lib/utils';
@@ -9,13 +9,17 @@ import { Upload, FileText, Sparkles, CheckCircle2, MapPin, Briefcase } from 'luc
 import Link from 'next/link';
 
 export default function ResumePage() {
+  const queryClient = useQueryClient();
   const [file, setFile] = useState<File | null>(null);
   const [dragOver, setDragOver] = useState(false);
   const [result, setResult] = useState<any>(null);
 
   const uploadMutation = useMutation({
     mutationFn: (f: File) => uploadResume(f),
-    onSuccess: (data: any) => setResult(data),
+    onSuccess: (data: any) => {
+      setResult(data);
+      queryClient.invalidateQueries({ queryKey: ['profile'] });
+    },
     onError: (err: Error) => alert(err.message),
   });
 
